@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_clean_architecture/src/core/classes/failure.dart';
-import 'package:flutter_clean_architecture/src/feature/post_list/domain/entities/post_entity.dart';
+import 'package:flutter_clean_architecture/src/feature/post_list/domain/dtos/post_dto.dart';
 import 'package:flutter_clean_architecture/src/feature/post_list/domain/repositories/post_list_repository.dart';
 
 class GetPostsUseCase {
@@ -8,7 +6,7 @@ class GetPostsUseCase {
 
   GetPostsUseCase(this._repository);
 
-  Future<Either<Failure, List<PostEntity>>> execute() async {
+  Future<List<PostDTO>> execute() async {
     return await _repository.getPosts();
   }
 }

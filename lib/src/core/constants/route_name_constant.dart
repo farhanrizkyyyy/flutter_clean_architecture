@@ -1,3 +1,4 @@
 class RouteNameConstant {
-  static String postList = '/post-list';
+  static const String posts = '/posts';
+  static const String postDetail = '/post-detail';
 }

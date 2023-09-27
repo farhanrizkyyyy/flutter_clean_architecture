@@ -1,18 +1,18 @@
 import 'dart:developer';
 
-import 'package:flutter_clean_architecture/src/feature/post_list/domain/entities/post_entity.dart';
+import 'package:flutter_clean_architecture/src/feature/post_list/domain/dtos/post_dto.dart';
 import 'package:flutter_clean_architecture/src/feature/post_list/domain/usecases/get_posts_usecase.dart';
 import 'package:get/get.dart';
 
-class PostListController extends GetxController {
+class PostController extends GetxController {
   final GetPostsUseCase _getPostsUseCase;
 
-  PostListController(this._getPostsUseCase);
+  PostController(this._getPostsUseCase);
 
   RxBool isLoading = true.obs;
   RxBool isError = false.obs;
   RxString errorMessage = ''.obs;
-  RxList<PostEntity> posts = <PostEntity>[].obs;
+  RxList<PostDTO> posts = <PostDTO>[].obs;
 
   @override
   void onInit() async {
@@ -26,21 +26,11 @@ class PostListController extends GetxController {
     errorMessage.value = '';
 
     try {
+      posts.clear();
       var result = await _getPostsUseCase.execute();
-
-      result.fold(
-        (l) {
-          isError.value = true;
-          errorMessage.value = l.message;
-          throw Exception();
-        },
-        (r) {
-          posts.clear();
-          posts.addAll(r);
-        },
-      );
+      posts.addAll(result);
     } catch (e) {
-      log('PostListController exception => $e');
+      log('PostController exception => $e');
     } finally {
       isLoading.value = false;
     }

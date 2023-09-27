@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       getPages: RouteConfig.pages,
-      initialRoute: RouteNameConstant.postList,
+      initialRoute: RouteNameConstant.posts,
     );
   }
 }
